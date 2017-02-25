@@ -12,6 +12,12 @@
 		9EEE1E211E5C446F00F1E24A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EEE1E1F1E5C446F00F1E24A /* Main.storyboard */; };
 		9EEE1E231E5C446F00F1E24A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EEE1E221E5C446F00F1E24A /* Assets.xcassets */; };
 		9EEE1E261E5C446F00F1E24A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EEE1E241E5C446F00F1E24A /* LaunchScreen.storyboard */; };
+		9EEE1E321E5C4A8900F1E24A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE1E311E5C4A8900F1E24A /* Constants.swift */; };
+		9EEE1E341E5D484800F1E24A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE1E331E5D484800F1E24A /* TableViewController.swift */; };
+		9EEE1E361E5D7C0D00F1E24A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE1E351E5D7C0D00F1E24A /* LoginViewController.swift */; };
+		9EEE1E381E5D7CEB00F1E24A /* ParseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE1E371E5D7CEB00F1E24A /* ParseAPI.swift */; };
+		9EEE1E3A1E5D7CF800F1E24A /* UdacityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE1E391E5D7CF800F1E24A /* UdacityAPI.swift */; };
+		9EEE1E3C1E5D7D2900F1E24A /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE1E3B1E5D7D2900F1E24A /* Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,12 @@
 		9EEE1E221E5C446F00F1E24A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9EEE1E251E5C446F00F1E24A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9EEE1E271E5C446F00F1E24A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EEE1E311E5C4A8900F1E24A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9EEE1E331E5D484800F1E24A /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		9EEE1E351E5D7C0D00F1E24A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9EEE1E371E5D7CEB00F1E24A /* ParseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPI.swift; sourceTree = "<group>"; };
+		9EEE1E391E5D7CF800F1E24A /* UdacityAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAPI.swift; sourceTree = "<group>"; };
+		9EEE1E3B1E5D7D2900F1E24A /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +78,10 @@
 		9EEE1E2D1E5C449300F1E24A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9EEE1E371E5D7CEB00F1E24A /* ParseAPI.swift */,
+				9EEE1E391E5D7CF800F1E24A /* UdacityAPI.swift */,
+				9EEE1E3B1E5D7D2900F1E24A /* Convenience.swift */,
+				9EEE1E311E5C4A8900F1E24A /* Constants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -73,6 +89,8 @@
 		9EEE1E2E1E5C44A500F1E24A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9EEE1E351E5D7C0D00F1E24A /* LoginViewController.swift */,
+				9EEE1E331E5D484800F1E24A /* TableViewController.swift */,
 				9EEE1E1D1E5C446F00F1E24A /* MapViewController.swift */,
 			);
 			name = Controller;
@@ -161,7 +179,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EEE1E1E1E5C446F00F1E24A /* MapViewController.swift in Sources */,
+				9EEE1E3C1E5D7D2900F1E24A /* Convenience.swift in Sources */,
 				9EEE1E1C1E5C446F00F1E24A /* AppDelegate.swift in Sources */,
+				9EEE1E3A1E5D7CF800F1E24A /* UdacityAPI.swift in Sources */,
+				9EEE1E321E5C4A8900F1E24A /* Constants.swift in Sources */,
+				9EEE1E361E5D7C0D00F1E24A /* LoginViewController.swift in Sources */,
+				9EEE1E381E5D7CEB00F1E24A /* ParseAPI.swift in Sources */,
+				9EEE1E341E5D484800F1E24A /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

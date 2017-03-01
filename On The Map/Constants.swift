@@ -28,7 +28,7 @@ extension Convenience {
         static let UdacityLink = "udacity.com"
     }
     
-    static var pins = [MKPointAnnotation]()
+    static var pins = [Pin]()
     
     struct HTTPHeaderKeys {
         static let ParseApplicationID = "X-Parse-Application-Id"

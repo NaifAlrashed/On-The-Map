@@ -45,6 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 do {
                     let pinObj = try Pin(pinObj: result)
                     print(pinObj)
+                    Convenience.pins.append(pinObj)
                     DispatchQueue.main.async {
                         self.mapView.addAnnotation(pinObj)
                     }

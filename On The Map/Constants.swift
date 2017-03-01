@@ -7,9 +7,10 @@
 //
 
 import Foundation
-
+import MapKit
 extension Convenience {
     
+    static var sessionID = ""
     enum Path: String {
         case studentLocation = "/parse/classes/StudentLocation"
         case login = "/api/session"
@@ -26,6 +27,8 @@ extension Convenience {
         static let ParseLink = "parse.udacity.com"
         static let UdacityLink = "udacity.com"
     }
+    
+    static var pins = [MKPointAnnotation]()
     
     struct HTTPHeaderKeys {
         static let ParseApplicationID = "X-Parse-Application-Id"

@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var error: UILabel!
     @IBOutlet weak var loading: UIActivityIndicatorView!
@@ -106,7 +106,31 @@ class LoginViewController: UIViewController {
         }
         
     }
-    
-    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let identifier = "pin"
+        
+        if annotation is Pin {
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView!.canShowCallout = true
+                let btn = UIButton(type: .detailDisclosure)
+                annotationView!.rightCalloutAccessoryView = btn
+            } else {
+                annotationView!.annotation = annotation
+            }
+            return annotationView
+        }
+        return nil
+    }
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            if let url = view.annotation?.subtitle {
+                let webView = storyboard?.instantiateViewController(withIdentifier: "webView")
+                
+            }
+        }
+    }
 }
 

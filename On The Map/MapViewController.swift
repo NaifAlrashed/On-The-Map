@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SafariServices
 class MapViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
 
@@ -78,10 +79,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return nil
     }
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("inside calloutAccessoryControlTapped")
         if control == view.rightCalloutAccessoryView {
             if let url = view.annotation?.subtitle {
-                let webView = storyboard?.instantiateViewController(withIdentifier: "webView")
-                
+                print("inside if let of that: \(url)")
+                //let webView = storyboard?.instantiateViewController(withIdentifier: "webView")
+                //UIApplication.shared.open(URL(string: url!)!, options: [:], completionHandler: nil)
+                let safari = SFSafariViewController(url: URL(string: url!)!)
+                present(safari, animated: true, completion: nil)
             }
         }
     }

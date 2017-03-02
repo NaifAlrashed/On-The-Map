@@ -1,21 +1,22 @@
 //
-//  Pin.swift
+//  userLocation.swift
 //  On The Map
 //
-//  Created by Naif Alrashed on 2/28/17.
+//  Created by Naif Alrashed on 3/2/17.
 //  Copyright © 2017 Naif Alrashed. All rights reserved.
 //
 
+import Foundation
 import MapKit
-class Pin: NSObject, MKAnnotation {
 
+class UserLocation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
     
-    init(coordinate: CLLocationCoordinate2D, title: String?, subTitle: String?) {
+    init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?) {
         self.coordinate = coordinate
         self.title = title
-        self.subtitle = subTitle
+        self.subtitle = subtitle
     }
 }

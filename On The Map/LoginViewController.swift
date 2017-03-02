@@ -104,10 +104,12 @@ class LoginViewController: UIViewController {
         }
         
         if let errorString = errorString {
-            let alert = UIAlertController(title: "error", message: "something went wrong", preferredStyle: .alert)
-            let cancelButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(cancelButton)
-            present(alert, animated: true, completion: nil)
+            if errorString != "incorrect Email and/or Password" {
+                let alert = UIAlertController(title: "error", message: "something went wrong", preferredStyle: .alert)
+                let cancelButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(cancelButton)
+                present(alert, animated: true, completion: nil)
+            }
             error?.text = errorString
         }
         

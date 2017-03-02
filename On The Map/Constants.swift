@@ -12,6 +12,7 @@ extension Convenience {
     
     static var sessionID = ""
     static var key = ""
+    
     enum Path: String {
         case studentLocation = "/parse/classes/StudentLocation"
         case login = "/api/session"

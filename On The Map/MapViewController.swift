@@ -44,12 +44,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             for result in results {
                 do {
-                    let pinObj = try Pin(pinObj: result)
-                    print(pinObj.updatedAt)
-                    let studentInfo = StudentInformation(firstName: pinObj.firstName, lastName: pinObj.lastName, latitude: pinObj.latitude, longitude: pinObj.longitude, mediaURL: pinObj.mediaURL)
+                    let studentInfo = try StudentInformation(json: result)
+                    print(studentInfo.updatedAt)
+                    let studentPin = Pin(coordinate: CLLocationCoordinate2DMake(studentInfo.latitude, studentInfo.longitude), title: studentInfo.firstName + " " + studentInfo.lastName, subTitle: studentInfo.mediaURL)
                     Convenience.pins.append(studentInfo)
                     DispatchQueue.main.async {
-                        self.mapView.addAnnotation(pinObj)
+                        self.mapView.addAnnotation(studentPin)
                     }
                 } catch {
                     print("++++++++++++++++++++++++++++++++++++++++++++++++++ couldn't do it++++++++++++++")
@@ -88,7 +88,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    @IBAction func uploadButtonPressed(_ sender: Any) {
+    @IBAction func postButtonPressed(_ sender: Any) {
         let _ = Convenience.shared.makeRequest(path: .userInfo, method: .get, json: nil, completionHandler: { (json, error) in
             
             guard error == nil else {
@@ -116,7 +116,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             print("first name: \(firstName), last name: \(lastName)")
         })
+        performSegue(withIdentifier: "post", sender: nil)
     }
-    
 }
-

@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-class LoginViewController: UIViewController, MKMapViewDelegate {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var error: UILabel!
     @IBOutlet weak var loading: UIActivityIndicatorView!
@@ -21,10 +21,6 @@ class LoginViewController: UIViewController, MKMapViewDelegate {
         loading.isHidden = true
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func LoginButtonPressed(_ sender: Any) {
         performUpdatesOnUI(errorString: nil, shouldPerformSeque: false)
@@ -37,14 +33,14 @@ class LoginViewController: UIViewController, MKMapViewDelegate {
             guard error == nil else {
                 print("this message runs in the completion handler for LoginViewController\(error)")
                 DispatchQueue.main.async {
-                    self.performUpdatesOnUI(errorString: "recieved error in response", shouldPerformSeque: false)
+                    self.performUpdatesOnUI(errorString: " ", shouldPerformSeque: false)
                 }
                 return
             }
             guard let sessionObject = theJson?["session"] as? [String:Any] else {
                 print("couldn't get sessionObject from: \(theJson)")
                 DispatchQueue.main.async {
-                    self.performUpdatesOnUI(errorString: "unexpected error", shouldPerformSeque: false)
+                    self.performUpdatesOnUI(errorString: " ", shouldPerformSeque: false)
                 }
                 return
             }
@@ -52,7 +48,7 @@ class LoginViewController: UIViewController, MKMapViewDelegate {
             guard let accountObject = theJson?["account"] as? [String:Any] else {
                 print("couldn't get account from: \(theJson)")
                 DispatchQueue.main.async {
-                    self.performUpdatesOnUI(errorString: "unexpected error", shouldPerformSeque: false)
+                    self.performUpdatesOnUI(errorString: " ", shouldPerformSeque: false)
                 }
                 return
             }
@@ -60,7 +56,7 @@ class LoginViewController: UIViewController, MKMapViewDelegate {
             guard let isRegistered = accountObject["registered"] as? Bool else {
                 print("couldn't get registered from: \(accountObject)")
                 DispatchQueue.main.async {
-                    self.performUpdatesOnUI(errorString: "unexpected error", shouldPerformSeque: false)
+                    self.performUpdatesOnUI(errorString: " ", shouldPerformSeque: false)
                 }
                 return
             }
@@ -73,19 +69,29 @@ class LoginViewController: UIViewController, MKMapViewDelegate {
                 return
             }
             
+            guard let key = accountObject["key"] as? String else {
+                print("couldn't get key from: \(accountObject)")
+                DispatchQueue.main.async {
+                    self.performUpdatesOnUI(errorString: " ", shouldPerformSeque: false)
+                }
+                return
+            }
+            
             guard let sessionID = sessionObject["id"] as? String else {
                 print("couldn't get id from: \(sessionObject)")
                 DispatchQueue.main.async {
-                    self.performUpdatesOnUI(errorString: "unexpected error", shouldPerformSeque: false)
+                    self.performUpdatesOnUI(errorString: " ", shouldPerformSeque: false)
                 }
                 return
             }
             
             print("got session id, the whole json is: \(theJson)")
             Convenience.sessionID = sessionID
+            Convenience.key = key
             DispatchQueue.main.async {
                 self.performUpdatesOnUI(errorString: nil, shouldPerformSeque: true)
             }
+            
         })
     }
     
@@ -98,6 +104,10 @@ class LoginViewController: UIViewController, MKMapViewDelegate {
         }
         
         if let errorString = errorString {
+            let alert = UIAlertController(title: "error", message: "something went wrong", preferredStyle: .alert)
+            let cancelButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(cancelButton)
+            present(alert, animated: true, completion: nil)
             error?.text = errorString
         }
         
@@ -105,32 +115,6 @@ class LoginViewController: UIViewController, MKMapViewDelegate {
             performSegue(withIdentifier: "tabBar", sender: nil)
         }
         
-    }
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        let identifier = "pin"
-        
-        if annotation is Pin {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-            if annotationView == nil {
-                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                annotationView!.canShowCallout = true
-                let btn = UIButton(type: .detailDisclosure)
-                annotationView!.rightCalloutAccessoryView = btn
-            } else {
-                annotationView!.annotation = annotation
-            }
-            return annotationView
-        }
-        return nil
-    }
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            if let url = view.annotation?.subtitle {
-                let webView = storyboard?.instantiateViewController(withIdentifier: "webView")
-                
-            }
-        }
     }
 }
 

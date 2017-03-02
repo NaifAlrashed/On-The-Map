@@ -19,17 +19,17 @@ class Convenience {
         let url: URL
         switch path {
         case .studentLocation where httpMethod == .get:
-            url = buildURL(host: Hosts.ParseLink, parameters: nil, path: path.rawValue)
+            url = buildURL(host: Hosts.ParseLink, parameters: ["order":"-updatedAt"], path: path.rawValue, pathParameter: nil)
         case .studentLocation where httpMethod == .post:
-            url = buildURL(host: Hosts.ParseLink, parameters: nil, path: path.rawValue)
+            url = buildURL(host: Hosts.ParseLink, parameters: nil, path: path.rawValue, pathParameter: nil)
         case .studentLocation where httpMethod == .put:
-            url = buildURL(host: Hosts.ParseLink, parameters: nil, path: path.rawValue)
+            url = buildURL(host: Hosts.ParseLink, parameters: nil, path: path.rawValue, pathParameter: nil)
         case .login where httpMethod == .post:
-            url = buildURL(host: Hosts.UdacityLink, parameters: nil, path: path.rawValue)
+            url = buildURL(host: Hosts.UdacityLink, parameters: nil, path: path.rawValue, pathParameter: nil)
         case .login where httpMethod == .delete:
-            url = buildURL(host: Hosts.UdacityLink, parameters: nil, path: path.rawValue)
+            url = buildURL(host: Hosts.UdacityLink, parameters: nil, path: path.rawValue, pathParameter: nil)
         case .userInfo where httpMethod == .get:
-            url = buildURL(host: Hosts.UdacityLink, parameters: nil, path: path.rawValue)
+            url = buildURL(host: Hosts.UdacityLink, parameters: nil, path: path.rawValue, pathParameter: Convenience.key)
         default:
             url = URL(string: "https://facebook.com")!
             print("isn't supposed to reach this place")
@@ -42,7 +42,6 @@ class Convenience {
     }
     
     private func setHTTPHeader(for request: NSMutableURLRequest,path: Path, HTTPMethod method: HTTPMethod, json: String?) {
-//        var request = urlRequest
         request.httpMethod = method.rawValue
         if method == .delete {
             var xsrfCookie: HTTPCookie? = nil
@@ -73,7 +72,11 @@ class Convenience {
             }
         }
     }
-    private func buildURL(host: String, parameters: [String:Any]?, path: String? = nil) -> URL {
+    private func buildURL(host: String, parameters: [String:Any]?, path: String? = nil, pathParameter: String?) -> URL {
+        var path = path
+        if let pathParameter = pathParameter {
+            path?.append(pathParameter)
+        }
         var components = URLComponents()
         components.scheme = Convenience.ApiScheme
         components.host = host
@@ -99,11 +102,16 @@ class Convenience {
                 return
             }
             
+            guard let a = (response as? HTTPURLResponse), a.statusCode >= 200 && a.statusCode <= 299 else {
+                completionHandler(nil, "response is not 2xx")
+                return
+            }
+            
             guard var data = data else {
                 completionHandler(nil, "data = nil")
                 return
             }
-            if path == .login {
+            if path == .login || path == .userInfo {
                 let range = Range(uncheckedBounds: (5, data.count))
                 data = data.subdata(in: range)
             }

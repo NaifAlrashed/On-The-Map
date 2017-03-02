@@ -11,10 +11,11 @@ import MapKit
 extension Convenience {
     
     static var sessionID = ""
+    static var key = ""
     enum Path: String {
         case studentLocation = "/parse/classes/StudentLocation"
         case login = "/api/session"
-        case userInfo = "/parse/classes/users/"
+        case userInfo = "/api/users/"
     }
     enum HTTPMethod: String {
         case post = "POST"
@@ -25,10 +26,10 @@ extension Convenience {
     static let ApiScheme = "https"
     struct Hosts {
         static let ParseLink = "parse.udacity.com"
-        static let UdacityLink = "udacity.com"
+        static let UdacityLink = "www.udacity.com"
     }
     
-    static var pins = [Pin]()
+    static var pins = [StudentInformation]()
     
     struct HTTPHeaderKeys {
         static let ParseApplicationID = "X-Parse-Application-Id"

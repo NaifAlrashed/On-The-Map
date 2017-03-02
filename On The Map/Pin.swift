@@ -17,7 +17,7 @@ class Pin: NSObject, MKAnnotation {
     let mapString: String
     let mediaURL: String
     let objectId: String
-    let uniqueKey: String
+    let uniqueKey: String? //optional value not always available in json
     let updatedAt: String
     var coordinate: CLLocationCoordinate2D
     var title: String?
@@ -33,7 +33,6 @@ class Pin: NSObject, MKAnnotation {
         let mapString = pinObj["mapString"] as? String,
         let mediaURL = pinObj["mediaURL"] as? String,
         let objectId = pinObj["objectId"] as? String,
-        let uniqueKey = pinObj["uniqueKey"] as? String,
         let updatedAt = pinObj["updatedAt"] as? String
         else {
             throw SerializationError.missing("couldn't unwrap json")            
@@ -47,7 +46,7 @@ class Pin: NSObject, MKAnnotation {
         self.mapString = mapString
         self.mediaURL = mediaURL
         self.objectId = objectId
-        self.uniqueKey = uniqueKey
+        self.uniqueKey = pinObj["uniqueKey"] as? String
         self.updatedAt = updatedAt
         self.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
         self.title = firstName + " " + lastName

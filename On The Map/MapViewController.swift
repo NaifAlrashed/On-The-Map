@@ -24,9 +24,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     func getPins() {
-        Convenience.shared.makeRequest(path: .studentLocation, method: .get, json: nil, completionHandler: { (theJson, error) in
+        let _ = Convenience.shared.makeRequest(path: .studentLocation, method: .get, json: nil, completionHandler: { (theJson, error) in
             
             if let error = error {
+                //TODO: make alertView
                 print("this is in mapViewController, and error is: \(error)")
                 return
             }
@@ -44,8 +45,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             for result in results {
                 do {
                     let pinObj = try Pin(pinObj: result)
-                    print(pinObj)
-                    Convenience.pins.append(pinObj)
+                    print(pinObj.updatedAt)
+                    let studentInfo = StudentInformation(firstName: pinObj.firstName, lastName: pinObj.lastName, latitude: pinObj.latitude, longitude: pinObj.longitude, mediaURL: pinObj.mediaURL)
+                    Convenience.pins.append(studentInfo)
                     DispatchQueue.main.async {
                         self.mapView.addAnnotation(pinObj)
                     }
@@ -56,9 +58,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
                 
                 print("----------------------------------------------------------------------")
-                
             }
-            
         })
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -80,16 +80,43 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return nil
     }
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("inside calloutAccessoryControlTapped")
         if control == view.rightCalloutAccessoryView {
             if let url = view.annotation?.subtitle {
-                print("inside if let of that: \(url)")
-                //let webView = storyboard?.instantiateViewController(withIdentifier: "webView")
-                //UIApplication.shared.open(URL(string: url!)!, options: [:], completionHandler: nil)
                 let safari = SFSafariViewController(url: URL(string: url!)!)
                 present(safari, animated: true, completion: nil)
             }
         }
     }
+    
+    @IBAction func uploadButtonPressed(_ sender: Any) {
+        let _ = Convenience.shared.makeRequest(path: .userInfo, method: .get, json: nil, completionHandler: { (json, error) in
+            
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            guard let json = json else {
+                print("json is nil")
+                return
+            }
+            
+            guard let user = json["user"] as? [String:Any] else {
+                print("couldn't get user from \(json)")
+                return
+            }
+            guard let firstName = user["first_name"] as? String else {
+                print("could't get first_name from \(json)")
+                return
+            }
+            
+            guard let lastName = user["last_name"] as? String else {
+                print("could't get last_name from \(json)")
+                return
+            }
+            
+            print("first name: \(firstName), last name: \(lastName)")
+        })
+    }
+    
 }
 

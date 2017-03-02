@@ -40,7 +40,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")!
-        cell.textLabel?.text = Convenience.pins[indexPath.row].title!
+        cell.textLabel?.text = Convenience.pins[indexPath.row].firstName + " " + Convenience.pins[indexPath.row].lastName
         return cell
     }
 }

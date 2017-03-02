@@ -55,11 +55,46 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="GTt-A3-ieG" id="bzd-M4-XfH"/>
+                        <segue destination="c6z-Wt-7SI" kind="presentation" id="i4A-la-pKT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsj-MK-Xqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2004" y="138.98050974512745"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="y0I-ck-RUY">
+            <objects>
+                <viewController id="c6z-Wt-7SI" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9WE-tQ-V5T"/>
+                        <viewControllerLayoutGuide type="bottom" id="39C-Kj-L4k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wlb-QH-IIo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UEk-Bn-zS7">
+                                <rect key="frame" x="16" y="30" width="343" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="cj4-gA-fwJ"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UEk-Bn-zS7" firstAttribute="top" secondItem="9WE-tQ-V5T" secondAttribute="bottom" constant="10" id="BVm-B3-lT4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UEk-Bn-zS7" secondAttribute="trailing" id="Ehn-6U-NGk"/>
+                            <constraint firstItem="UEk-Bn-zS7" firstAttribute="leading" secondItem="Wlb-QH-IIo" secondAttribute="leadingMargin" id="LHg-4M-3gE"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ov-Rk-B07" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2868" y="-127"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="xlC-qG-cJ6">
@@ -89,11 +124,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ML2-k4-ent">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Niu-mY-Qmk"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="Niu-mY-Qmk">
+                            <connections>
+                                <action selector="uploadButtonPressed:" destination="KHu-fR-bf5" id="7fn-4h-BOZ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="1JT-L7-Lec"/>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="MQV-rq-Lv2" id="5Mg-yg-DvT"/>
+                        <segue destination="c6z-Wt-7SI" kind="presentation" id="noP-Zs-qCP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dQO-xn-5Wg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -230,4 +270,7 @@
             <point key="canvasLocation" x="1064.8" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="noP-Zs-qCP"/>
+    </inferredMetricsTieBreakers>
 </document>

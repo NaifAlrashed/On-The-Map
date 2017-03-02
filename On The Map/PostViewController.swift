@@ -19,6 +19,7 @@ class PostViewController: UIViewController {
     @IBOutlet weak var link: UITextField!
     @IBOutlet weak var place: UITextField!
     var coordinates: CLLocationCoordinate2D? = nil
+    var didCompleteposting = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,20 +45,28 @@ class PostViewController: UIViewController {
         loading.startAnimating()
         
         guard let place = place?.text else {
-            
+            DispatchQueue.main.async {
+                self.makeAndShowAlertView(message: "loacation not found", subMessage: "please enter another location")
+                self.loading.isHidden = true
+                self.loading.stopAnimating()
+            }
             return
         }
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(place, completionHandler: {(placeMarks, error) -> Void in
             guard let placeMark = placeMarks?.first else {
                 DispatchQueue.main.async {
-                    self.makeAndShowAlertView()
+                    self.makeAndShowAlertView(message: "loacation not found", subMessage: "please enter another location")
+                    self.loading.isHidden = true
+                    self.loading.stopAnimating()
                 }
                 return
             }
             guard let twoDCoordinate = placeMark.location?.coordinate else {
                 DispatchQueue.main.async {
-                    self.makeAndShowAlertView()
+                    self.makeAndShowAlertView(message: "loacation not found", subMessage: "please enter another location")
+                    self.loading.isHidden = true
+                    self.loading.stopAnimating()
                 }
                 return
             }
@@ -73,6 +82,46 @@ class PostViewController: UIViewController {
     }
     
     @IBAction func post(_ sender: Any) {
+        loading.isHidden = false
+        loading.startAnimating()
+        
+        guard let coordinates = coordinates,
+            let placeName = place.text else {
+            DispatchQueue.main.async {
+                self.makeAndShowAlertView(message: "error", subMessage: "didn't find data entered earlier, please cancel operation")
+            }
+            return
+        }
+        
+        guard let linkInfo = link.text else {
+            DispatchQueue.main.async {
+                self.makeAndShowAlertView(message: "No Link!", subMessage: "please provide a link, so others can know who you are!")
+            }
+            return
+        }
+        let json = "{\"uniqueKey\": \"\(Convenience.key)\", \"firstName\": \"\(Convenience.personalInfo.firstName)\", \"lastName\": \"\(Convenience.personalInfo.lastName)\",\"mapString\": \"\(placeName)\", \"mediaURL\": \"\(linkInfo)\",\"latitude\": \(coordinates.latitude), \"longitude\": \(coordinates.longitude)}"
+        
+        let _ = Convenience.shared.makeRequest(path: .studentLocation, method: .post, json: json, completionHandler: { (json, error) in
+            
+            guard error == nil else {
+                print("got an error in while new location \(error)")
+                return
+            }
+            
+            guard let json = json else {
+                print("the json is nil!!!!")
+                return
+            }
+            let newPin = StudentInformation.init(createdAt: nil, firstName: Convenience.personalInfo.firstName, lastName: Convenience.personalInfo.lastName, latitude: coordinates.latitude, longitude: coordinates.longitude, mapString: placeName, mediaURL: linkInfo, objectId: nil, uniqueKey: nil, updatedAt: nil)
+            
+            Convenience.pins.append(newPin)
+            print("success in posting the location!!!: \(json)")
+            self.didCompleteposting = true
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
+        
     }
     
     private func toggleAppearance() {
@@ -87,8 +136,8 @@ class PostViewController: UIViewController {
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    private func makeAndShowAlertView() {
-        let alert = UIAlertController(title: "loacation not found", message: "please enter another location", preferredStyle: .alert)
+    private func makeAndShowAlertView(message: String, subMessage: String) {
+        let alert = UIAlertController(title: message, message: subMessage, preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(cancelButton)
         place.text = ""

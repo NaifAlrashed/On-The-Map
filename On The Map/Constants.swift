@@ -13,6 +13,10 @@ extension Convenience {
     static var sessionID = ""
     static var key = ""
     
+    struct personalInfo {
+        static var firstName = ""
+        static var lastName = ""
+    }
     enum Path: String {
         case studentLocation = "/parse/classes/StudentLocation"
         case login = "/api/session"

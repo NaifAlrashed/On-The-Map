@@ -14,20 +14,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         getPins()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func getPins() {
         let _ = Convenience.shared.makeRequest(path: .studentLocation, method: .get, json: nil, completionHandler: { (theJson, error) in
             
             if let error = error {
-                //TODO: make alertView
+                self.makeAndShowAlertView(message: "error", subMessage: "couldn't load data")
                 print("this is in mapViewController, and error is: \(error)")
                 return
             }
@@ -45,8 +39,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             for result in results {
                 do {
                     let studentInfo = try StudentInformation(json: result)
-                    print(studentInfo.updatedAt)
-                    let studentPin = Pin(coordinate: CLLocationCoordinate2DMake(studentInfo.latitude, studentInfo.longitude), title: studentInfo.firstName + " " + studentInfo.lastName, subTitle: studentInfo.mediaURL)
+                    let studentPin = self.makePin(from: studentInfo)
                     Convenience.pins.append(studentInfo)
                     DispatchQueue.main.async {
                         self.mapView.addAnnotation(studentPin)
@@ -115,7 +108,52 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
             
             print("first name: \(firstName), last name: \(lastName)")
+            
+            Convenience.personalInfo.firstName = firstName
+            Convenience.personalInfo.lastName = lastName
         })
+//        let controller = storyboard?.instantiateViewController(withIdentifier: "PostView")
+//            as! PostViewController
+//        
+//        present(controller, animated: true, completion: {
+//            if controller.didCompleteposting {
+//                DispatchQueue.main.async {
+//                    self.mapView.addAnnotation(self.makePin(from: Convenience.pins.last!))
+//                }
+//            }
+//        })
         performSegue(withIdentifier: "post", sender: nil)
+    }
+    private func makePin(from studentInfo: StudentInformation) -> Pin {
+        return Pin(coordinate: CLLocationCoordinate2DMake(studentInfo.latitude, studentInfo.longitude), title: studentInfo.firstName + " " + studentInfo.lastName, subTitle: studentInfo.mediaURL)
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        let _ = Convenience.shared.makeRequest(path: .login, method: .delete, json: nil, completionHandler: { (json, error) in
+            
+            guard error == nil else {
+                print("got error: \(error)")
+                return
+            }
+            
+            guard let json = json else {
+                print("json is nil!")
+                return
+            }
+            
+            print("got json!!!: \(json)")
+            
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
+    }
+    private func makeAndShowAlertView(message: String, subMessage: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: message, message: subMessage, preferredStyle: .alert)
+            let cancelButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(cancelButton)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

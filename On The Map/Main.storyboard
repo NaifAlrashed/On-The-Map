@@ -50,8 +50,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rOd-za-zqu">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="p0O-dK-UZr"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="17o-YR-wkt"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="p0O-dK-UZr">
+                            <connections>
+                                <action selector="post:" destination="wur-4j-Dmc" id="PmJ-Vc-Axq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="17o-YR-wkt">
+                            <connections>
+                                <action selector="logout:" destination="wur-4j-Dmc" id="bpo-7G-zjK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="GTt-A3-ieG" id="bzd-M4-XfH"/>
@@ -65,7 +73,7 @@
         <!--Post View Controller-->
         <scene sceneID="y0I-ck-RUY">
             <objects>
-                <viewController id="c6z-Wt-7SI" customClass="PostViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostView" id="c6z-Wt-7SI" customClass="PostViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9WE-tQ-V5T"/>
                         <viewControllerLayoutGuide type="bottom" id="39C-Kj-L4k"/>
@@ -196,7 +204,11 @@
                                 <action selector="postButtonPressed:" destination="KHu-fR-bf5" id="WZK-br-Mhl"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="1JT-L7-Lec"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="1JT-L7-Lec">
+                            <connections>
+                                <action selector="logout:" destination="KHu-fR-bf5" id="fZ7-7c-E4b"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="MQV-rq-Lv2" id="5Mg-yg-DvT"/>
@@ -273,7 +285,7 @@
                         <outlet property="error" destination="A8P-Br-1Y7" id="YHW-uH-8a1"/>
                         <outlet property="loading" destination="4mO-BL-FR9" id="9xo-I4-Txq"/>
                         <outlet property="password" destination="fSL-nk-4zQ" id="qgt-mT-l3G"/>
-                        <segue destination="lCw-Mf-73N" kind="show" identifier="tabBar" id="HQF-o5-98H"/>
+                        <segue destination="lCw-Mf-73N" kind="presentation" identifier="tabBar" id="HQF-o5-98H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kNL-zL-ejZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

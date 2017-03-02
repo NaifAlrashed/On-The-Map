@@ -7,16 +7,16 @@
 //
 
 struct StudentInformation {
-    let createdAt: String
+    let createdAt: String?
     let firstName: String
     let lastName: String
     let latitude: Double
     let longitude: Double
     let mapString: String
     let mediaURL: String
-    let objectId: String
+    let objectId: String?
     let uniqueKey: String? //optional value not always available in json (according to udacity documentation)
-    let updatedAt: String
+    let updatedAt: String?
     
     init(json: [String:Any]) throws {
         guard let createdAt = json["createdAt"] as? String,
@@ -41,6 +41,19 @@ struct StudentInformation {
         self.mediaURL = mediaURL
         self.objectId = objectId
         self.uniqueKey = json["uniqueKey"] as? String
+        self.updatedAt = updatedAt
+    }
+    //this init used when after posting a new location, to add it to the shared array to update the tableView
+    init(createdAt: String?, firstName: String, lastName: String, latitude: Double, longitude: Double, mapString: String, mediaURL: String, objectId: String?, uniqueKey: String?, updatedAt: String?) {
+        self.createdAt = createdAt
+        self.firstName = firstName
+        self.lastName = lastName
+        self.latitude = latitude
+        self.longitude = longitude
+        self.mapString = mapString
+        self.mediaURL = mediaURL
+        self.objectId = objectId
+        self.uniqueKey = uniqueKey
         self.updatedAt = updatedAt
     }
     enum SerializationError: Error {

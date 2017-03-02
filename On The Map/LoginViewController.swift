@@ -21,6 +21,13 @@ class LoginViewController: UIViewController {
         loading.isHidden = true
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        error.text = ""
+        password.text = ""
+        email.text = ""
+    }
     
     @IBAction func LoginButtonPressed(_ sender: Any) {
         performUpdatesOnUI(errorString: nil, shouldPerformSeque: false)

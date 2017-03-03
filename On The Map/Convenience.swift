@@ -19,7 +19,7 @@ class Convenience {
         let url: URL
         switch path {
         case .studentLocation where httpMethod == .get:
-            url = buildURL(host: Hosts.ParseLink, parameters: ["order":"-updatedAt"], path: path.rawValue, pathParameter: nil)
+            url = buildURL(host: Hosts.ParseLink, parameters: ["order":"-updatedAt", "limit":"100"], path: path.rawValue, pathParameter: nil)
         case .studentLocation where httpMethod == .post:
             url = buildURL(host: Hosts.ParseLink, parameters: nil, path: path.rawValue, pathParameter: nil)
         case .studentLocation where httpMethod == .put:
@@ -103,7 +103,7 @@ class Convenience {
             }
             
             guard let a = (response as? HTTPURLResponse), a.statusCode >= 200 && a.statusCode <= 299 else {
-                completionHandler(nil, "response is not 2xx")
+                completionHandler(nil, "response is not 2xx, and it is: \((response as? HTTPURLResponse)!.statusCode)")
                 return
             }
             

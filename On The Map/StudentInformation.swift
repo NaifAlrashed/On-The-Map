@@ -5,11 +5,12 @@
 //  Created by Naif Alrashed on 3/1/17.
 //  Copyright © 2017 Naif Alrashed. All rights reserved.
 //
+import Foundation
 
 struct StudentInformation {
     let createdAt: String?
-    let firstName: String
-    let lastName: String
+    var firstName: String
+    var lastName: String
     let latitude: Double
     let longitude: Double
     let mapString: String
@@ -33,8 +34,8 @@ struct StudentInformation {
         }
         
         self.createdAt = createdAt
-        self.firstName = firstName
-        self.lastName = lastName
+        self.firstName = firstName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        self.lastName = lastName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         self.latitude = latitude
         self.longitude = longitude
         self.mapString = mapString
@@ -42,6 +43,15 @@ struct StudentInformation {
         self.objectId = objectId
         self.uniqueKey = json["uniqueKey"] as? String
         self.updatedAt = updatedAt
+        
+        if self.firstName == "" {
+            self.firstName = "No"
+        }
+        
+        if self.lastName == "" {
+            self.lastName = "Name"
+        }
+        
     }
     //this init used when after posting a new location, to add it to the shared array to update the tableView
     init(createdAt: String?, firstName: String, lastName: String, latitude: Double, longitude: Double, mapString: String, mediaURL: String, objectId: String?, uniqueKey: String?, updatedAt: String?) {

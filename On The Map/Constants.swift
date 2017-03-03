@@ -10,13 +10,6 @@ import Foundation
 import MapKit
 extension Convenience {
     
-    static var sessionID = ""
-    static var key = ""
-    
-    struct personalInfo {
-        static var firstName = ""
-        static var lastName = ""
-    }
     enum Path: String {
         case studentLocation = "/parse/classes/StudentLocation"
         case login = "/api/session"
@@ -33,8 +26,6 @@ extension Convenience {
         static let ParseLink = "parse.udacity.com"
         static let UdacityLink = "www.udacity.com"
     }
-    
-    static var pins = [StudentInformation]()
     
     struct HTTPHeaderKeys {
         static let ParseApplicationID = "X-Parse-Application-Id"

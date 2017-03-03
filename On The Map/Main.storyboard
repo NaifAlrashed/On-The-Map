@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DAZ-yd-9xl" id="17L-sc-a5X">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -50,14 +50,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rOd-za-zqu">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="p0O-dK-UZr">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="p0O-dK-UZr">
                             <connections>
-                                <action selector="post:" destination="wur-4j-Dmc" id="PmJ-Vc-Axq"/>
+                                <action selector="logout:" destination="wur-4j-Dmc" id="Nvj-6D-Wi0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="17o-YR-wkt">
+                        <barButtonItem key="rightBarButtonItem" image="pin" id="17o-YR-wkt">
                             <connections>
-                                <action selector="logout:" destination="wur-4j-Dmc" id="bpo-7G-zjK"/>
+                                <action selector="post:" destination="wur-4j-Dmc" id="BqA-2a-K9t"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -199,14 +199,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ML2-k4-ent">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Niu-mY-Qmk">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Niu-mY-Qmk">
                             <connections>
-                                <action selector="postButtonPressed:" destination="KHu-fR-bf5" id="WZK-br-Mhl"/>
+                                <action selector="logout:" destination="KHu-fR-bf5" id="SLj-Yy-Fnc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="1JT-L7-Lec">
+                        <barButtonItem key="rightBarButtonItem" image="pin" id="1JT-L7-Lec">
                             <connections>
-                                <action selector="logout:" destination="KHu-fR-bf5" id="fZ7-7c-E4b"/>
+                                <action selector="post:" destination="KHu-fR-bf5" id="RRK-mu-prf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -367,7 +367,10 @@
             <point key="canvasLocation" x="2866.875" y="-127.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pin" width="32" height="32"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="noP-Zs-qCP"/>
+        <segue reference="i4A-la-pKT"/>
     </inferredMetricsTieBreakers>
 </document>

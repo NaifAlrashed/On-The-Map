@@ -19,12 +19,8 @@ class PostViewController: UIViewController {
     @IBOutlet weak var link: UITextField!
     @IBOutlet weak var place: UITextField!
     var coordinates: CLLocationCoordinate2D? = nil
-    var didCompleteposting = false
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+    
+    let postNewPin = Post()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -99,31 +95,17 @@ class PostViewController: UIViewController {
             }
             return
         }
-        let json = "{\"uniqueKey\": \"\(Convenience.key)\", \"firstName\": \"\(Convenience.personalInfo.firstName)\", \"lastName\": \"\(Convenience.personalInfo.lastName)\",\"mapString\": \"\(placeName)\", \"mediaURL\": \"\(linkInfo)\",\"latitude\": \(coordinates.latitude), \"longitude\": \(coordinates.longitude)}"
-        
-        let _ = Convenience.shared.makeRequest(path: .studentLocation, method: .post, json: json, completionHandler: { (json, error) in
-            
-            guard error == nil else {
-                print("got an error in while new location \(error)")
-                return
-            }
-            
-            guard let json = json else {
-                print("the json is nil!!!!")
-                return
-            }
-            let newPin = StudentInformation.init(createdAt: nil, firstName: Convenience.personalInfo.firstName, lastName: Convenience.personalInfo.lastName, latitude: coordinates.latitude, longitude: coordinates.longitude, mapString: placeName, mediaURL: linkInfo, objectId: nil, uniqueKey: nil, updatedAt: nil)
-            
-            Convenience.pins.append(newPin)
-            print("success in posting the location!!!: \(json)")
-            self.didCompleteposting = true
-            DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
+        postNewPin.postAPin(placeName: placeName, linkInfo: linkInfo, coordinates: coordinates, completionHandler: { error in
+            if let error = error {
+                self.makeAndShowAlertView(message: "error", subMessage: "something went wrong")
+            } else {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         })
         
     }
-    
     private func toggleAppearance() {
         loading.isHidden = !loading.isHidden
         mapView.isHidden = !mapView.isHidden
@@ -135,14 +117,5 @@ class PostViewController: UIViewController {
     
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-    private func makeAndShowAlertView(message: String, subMessage: String) {
-        let alert = UIAlertController(title: message, message: subMessage, preferredStyle: .alert)
-        let cancelButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(cancelButton)
-        place.text = ""
-        loading.stopAnimating()
-        loading.isHidden = true
-        present(alert, animated: true, completion: nil)
     }
 }

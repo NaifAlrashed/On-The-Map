@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E17A7601E69C02B004CA4A3 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17A75F1E69C02B004CA4A3 /* Login.swift */; };
+		9E17A7621E69C04A004CA4A3 /* MapAndTableNetworkingModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17A7611E69C04A004CA4A3 /* MapAndTableNetworkingModule.swift */; };
+		9E17A7641E69C069004CA4A3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17A7631E69C069004CA4A3 /* Post.swift */; };
+		9E17A7661E69C07C004CA4A3 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17A7651E69C07C004CA4A3 /* Variables.swift */; };
+		9E17A7681E69CAEF004CA4A3 /* UIViewControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17A7671E69CAEF004CA4A3 /* UIViewControllerExtention.swift */; };
 		9E2C6F341E63386B0077D58F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E2C6F331E63386B0077D58F /* MapKit.framework */; };
 		9E2C6F361E656FA20077D58F /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2C6F351E656FA20077D58F /* Pin.swift */; };
 		9EAB6D341E670C3F001C8592 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EAB6D331E670C3F001C8592 /* Main.storyboard */; };
@@ -23,6 +28,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E17A75F1E69C02B004CA4A3 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		9E17A7611E69C04A004CA4A3 /* MapAndTableNetworkingModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAndTableNetworkingModule.swift; sourceTree = "<group>"; };
+		9E17A7631E69C069004CA4A3 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		9E17A7651E69C07C004CA4A3 /* Variables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		9E17A7671E69CAEF004CA4A3 /* UIViewControllerExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtention.swift; sourceTree = "<group>"; };
 		9E2C6F331E63386B0077D58F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		9E2C6F351E656FA20077D58F /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		9EAB6D331E670C3F001C8592 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -92,10 +102,14 @@
 		9EEE1E2D1E5C449300F1E24A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9E17A75F1E69C02B004CA4A3 /* Login.swift */,
+				9E17A7611E69C04A004CA4A3 /* MapAndTableNetworkingModule.swift */,
+				9E17A7631E69C069004CA4A3 /* Post.swift */,
 				9EAB6D391E671B0F001C8592 /* StudentInformation.swift */,
 				9EEE1E3B1E5D7D2900F1E24A /* Convenience.swift */,
 				9E2C6F351E656FA20077D58F /* Pin.swift */,
 				9EEE1E311E5C4A8900F1E24A /* Constants.swift */,
+				9E17A7651E69C07C004CA4A3 /* Variables.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -105,6 +119,7 @@
 			children = (
 				9EAB6D3B1E672138001C8592 /* PostViewController.swift */,
 				9EEE1E351E5D7C0D00F1E24A /* LoginViewController.swift */,
+				9E17A7671E69CAEF004CA4A3 /* UIViewControllerExtention.swift */,
 				9EEE1E331E5D484800F1E24A /* TableViewController.swift */,
 				9EEE1E1D1E5C446F00F1E24A /* MapViewController.swift */,
 			);
@@ -199,11 +214,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EEE1E1E1E5C446F00F1E24A /* MapViewController.swift in Sources */,
+				9E17A7601E69C02B004CA4A3 /* Login.swift in Sources */,
 				9EEE1E3C1E5D7D2900F1E24A /* Convenience.swift in Sources */,
+				9E17A7641E69C069004CA4A3 /* Post.swift in Sources */,
 				9EEE1E1C1E5C446F00F1E24A /* AppDelegate.swift in Sources */,
 				9E2C6F361E656FA20077D58F /* Pin.swift in Sources */,
+				9E17A7661E69C07C004CA4A3 /* Variables.swift in Sources */,
+				9E17A7681E69CAEF004CA4A3 /* UIViewControllerExtention.swift in Sources */,
 				9EEE1E321E5C4A8900F1E24A /* Constants.swift in Sources */,
 				9EEE1E361E5D7C0D00F1E24A /* LoginViewController.swift in Sources */,
+				9E17A7621E69C04A004CA4A3 /* MapAndTableNetworkingModule.swift in Sources */,
 				9EAB6D3A1E671B0F001C8592 /* StudentInformation.swift in Sources */,
 				9EEE1E341E5D484800F1E24A /* TableViewController.swift in Sources */,
 				9EAB6D3C1E672138001C8592 /* PostViewController.swift in Sources */,
